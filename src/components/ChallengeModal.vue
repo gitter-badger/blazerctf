@@ -26,7 +26,7 @@ export default {
     return {
       open: false
     }
-  },
+  }
 }
 </script>
 

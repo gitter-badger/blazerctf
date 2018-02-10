@@ -25,32 +25,32 @@
 <script>
 export default {
   name: 'scoreboard',
-  data() {
+  data () {
     return {
       teams: [{
         place: 1,
-        name: "First Example Team",
-        school: "Fake School",
+        name: 'First Example Team',
+        school: 'Fake School',
         points: 987
       }, {
         place: 2,
-        name: "Second Example Team",
-        school: "Not A Real School",
+        name: 'Second Example Team',
+        school: 'Not A Real School',
         points: 923
       }, {
         place: 3,
-        name: "Third Example Team",
-        school: "Nonexistant School",
+        name: 'Third Example Team',
+        school: 'Nonexistant School',
         points: 642
       }, {
         place: 4,
-        name: "Fourth Example Team",
-        school: "School That Doesn't Exist",
+        name: 'Fourth Example Team',
+        school: 'School That Doesn\'t Exist',
         points: 12
       }, {
         place: 5,
-        name: "Fifth Example Team",
-        school: "No School",
+        name: 'Fifth Example Team',
+        school: 'No School',
         points: 3
       }]
     }
