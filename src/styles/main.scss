@@ -1,0 +1,41 @@
+@import "./colors.scss";
+@import "./typography.scss";
+
+html, body {
+  margin: 0;
+}
+
+.container {
+  margin: 10vh 10vw 0 10vw;
+}
+
+button {
+  background-color: $primary;
+  border: 2px solid $primary;
+  border-radius: 5px;
+  outline: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: darken($primary, 5%);
+    border: 2px solid darken($primary, 5%);
+  }
+}
+
+input {
+  border: 1px solid gray;
+  padding-left: 0.5em;
+  border-radius: 5px;
+  outline: none;
+
+  &:focus {
+    border: 1px solid $primary;
+  }
+}
+
+.hidden {
+  display: none;
+}
