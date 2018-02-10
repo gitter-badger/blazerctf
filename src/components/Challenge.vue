@@ -27,7 +27,7 @@ export default {
     text-align: center;
     padding: 1em;
     min-height: 9em;
-    width: 18em;
+    max-width: 18em;
     margin: 1em;
     background-color: rgba(230, 230, 230, 0.5);
     box-shadow: rgba(200, 200, 200, 0.8) 0.2em 0.2em;

@@ -38,6 +38,15 @@ export default {
     text-align: center;
   }
 
+  .modal-container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: auto;
+  }
+
   .modal-bg {
     height: 100vh;
     width: 100vw;
@@ -53,14 +62,13 @@ export default {
 
   .modal {
     position: absolute;
-    top: 45%;
+    top: 48%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%) translateX(-50%);
     z-index: 2;
     padding: 2em;
     min-height: 30vh;
     max-width: 30em;
-    margin: 1em;
     background-color: white;
     box-shadow: darken(white, 30%) 0.2em 0.2em;
 

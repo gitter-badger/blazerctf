@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container form">
     <h1>Login</h1>
     <input type="text" placeholder="Username"><br>
     <input type="password" placeholder="Password"><br>
@@ -10,14 +10,5 @@
 <style scoped>
   .container {
     text-align: center;
-  }
-
-  input {
-    width: 100%;
-  }
-
-  input, button {
-    font-size: 1.5em;
-    margin: 0.2em;
   }
 </style>

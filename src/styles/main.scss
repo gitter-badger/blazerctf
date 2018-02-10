@@ -9,6 +9,17 @@ html, body {
   margin: 10vh 10vw 0 10vw;
 }
 
+.form {
+  input {
+    width: 90%;
+  }
+
+  input, button {
+    font-size: 1.5em;
+    margin: 0.2em 0;
+  }
+}
+
 button {
   background-color: $primary;
   border: 2px solid $primary;
@@ -17,7 +28,7 @@ button {
 
   color: white;
 
-  padding: 0.2em;
+  padding: 0.2em 0.5em;
 
   &:hover {
     cursor: pointer;
@@ -41,5 +52,5 @@ input {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
