@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Challenges</h1>
+    <h1 class="center">Challenges</h1>
     <div class="challenges">
       <div v-for="challenge in challenges" class="challenge-group">
         <challenge :title="challenge.title" :points="challenge.points" :category="challenge.category"></challenge>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>About</h1>
+    <h1 class="center">About</h1>
     <h2>Rules</h2>
     <h4>Eligibility</h4>
 

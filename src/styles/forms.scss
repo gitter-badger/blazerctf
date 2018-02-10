@@ -1,0 +1,98 @@
+.form {
+  margin: 0 20vw;
+
+  @media screen and (max-width: 768px) {
+    margin: 0;
+  }
+  span {
+    position: relative;
+    bottom: 0.34em;
+  }
+
+  input {
+    display: block;
+    margin-bottom: 0.5em !important;
+  }
+
+  input[type="text"], input[type="password"], input[type="email"] {
+    width: 100%;
+  }
+
+  input[type="text"], input[type="password"], input[type="email"], button {
+    font-size: 1.5em;
+    margin: 0.2em 0;
+  }
+
+  input[type="checkbox"] {
+    visibility: hidden;
+  }
+
+  .checkbox {
+    display: inline-block;
+    font-size: 0.7em;
+    width: 2em;
+    height: 2em;
+    background: #ddd;
+    border-radius: 0.5em;
+    position: relative;
+
+    label {
+      width: 2em;
+      height: 2em;
+
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    label .check {
+      width: 0.6em;
+      height: 1.2em;
+      transform: rotate(30deg);
+
+      cursor: pointer;
+      position: absolute;
+      top: 0.2em;
+      left: 0.6em;
+      z-index: 0;
+    }
+
+    & input[type=checkbox]:checked + label .check {
+      border-right: 0.2em solid $primary;
+      border-bottom: 0.2em solid $primary;
+    }
+  }
+}
+
+button {
+  background-color: $primary;
+  border: 2px solid $primary;
+  border-radius: 5px;
+  outline: none;
+
+  color: white;
+
+  padding: 0.2em 0.5em;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: darken($primary, 5%);
+    border: 2px solid darken($primary, 5%);
+  }
+}
+
+input {
+  border: 1px solid gray;
+  padding-left: 0.3em;
+  border-radius: 5px;
+  outline: none;
+
+  &:focus {
+    border: 1px solid $primary;
+  }
+}

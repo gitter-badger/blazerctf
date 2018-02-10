@@ -1,5 +1,6 @@
 @import "./colors.scss";
 @import "./typography.scss";
+@import "./forms.scss";
 
 html, body {
   margin: 0;
@@ -7,48 +8,6 @@ html, body {
 
 .container {
   margin: 10vh 10vw 0 10vw;
-}
-
-.form {
-  input {
-    width: 90%;
-  }
-
-  input, button {
-    font-size: 1.5em;
-    margin: 0.2em 0;
-  }
-}
-
-button {
-  background-color: $primary;
-  border: 2px solid $primary;
-  border-radius: 5px;
-  outline: none;
-
-  color: white;
-
-  padding: 0.2em 0.5em;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:active {
-    background-color: darken($primary, 5%);
-    border: 2px solid darken($primary, 5%);
-  }
-}
-
-input {
-  border: 1px solid gray;
-  padding-left: 0.5em;
-  border-radius: 5px;
-  outline: none;
-
-  &:focus {
-    border: 1px solid $primary;
-  }
 }
 
 .hidden {

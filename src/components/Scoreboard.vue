@@ -77,6 +77,7 @@ export default {
     }
 
     &, th, td {
+      padding-left: 0.5em;
       border-bottom: 1px solid black;
       border-collapse: collapse;
     }

@@ -1,14 +1,12 @@
 <template>
-  <div class="container form">
-    <h1>Login</h1>
-    <input type="text" placeholder="Username"><br>
-    <input type="password" placeholder="Password"><br>
-    <button>Log In</button>
+  <div class="container">
+    <div class="form">
+      <h1>Login</h1>
+      <label>Username:</label><br>
+      <input type="text" placeholder="username">
+      <label>Password:</label><br>
+      <input type="password" placeholder="password">
+      <button>Log In</button>
+    </div>
   </div>
 </template>
-
-<style scoped>
-  .container {
-    text-align: center;
-  }
-</style>
