@@ -4,6 +4,8 @@
     <router-link class="item" to="/about">About</router-link>
     <router-link class="item" to="/challenges">Challenges</router-link>
     <router-link class="item" to="/scoreboard">Scoreboard</router-link>
+    <router-link class="item right-divide" to="/login">Login</router-link>
+    <router-link class="item" to="/signup">Signup</router-link>
   </nav>
 </template>
 
@@ -11,6 +13,7 @@
   @import "../styles/colors.scss";
 
   .navbar {
+    display: flex;
     position: absolute;
     top: 0;
     background-color: #c84b4b;
@@ -20,11 +23,15 @@
 
     .item {
       height: 3em;
-      vertical-align: middle;
-      display: table-cell;
+      display: flex;
+      align-items: center;
       padding: 0 1em;
       color: white;
       text-decoration: none;
+
+      &.right-divide {
+        margin-left: auto;
+      }
 
       &:hover {
         background-color: $primary;

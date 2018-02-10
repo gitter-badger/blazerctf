@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <h1>About BlazerCTF</h1>
+    <h1>About</h1>
     <h2>Rules</h2>
     <h4>Eligibility</h4>
 
-    <p>Anyone can participate in BlazerCTF. However, due to various reasons, we can only give prizes to teams from the United States. In order for a team to be eligible for prizes, all team members must be affiliated with either a public or private middle or high school in the U.S. or be home-schooled. College students, international students, industry professionals, and anyone else from around the world is allowed to participate, however, they will be ineligible to win prizes.</p>
+    <p>Anyone can participate in BlazerCTF. However, due to various reasons, we can only give prizes to teams from the United States. In order for a team to be eligible for prizes, all team members must be affiliated with either a public or private middle or high school in the U.S. or be home-schooled. College students, international students, industry professionals, and anyone else from around the world are allowed to participate, however, they will be ineligible to win prizes.</p>
 
     <h4>Rules and Restrictions</h4>
     <ol>

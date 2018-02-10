@@ -1,6 +1,7 @@
 <template>
   <div class="modal-container" :class="{ 'hidden': !open }">
     <div class="modal">
+      <div @click="open = false" class="close">&times;</div>
       <div class="problem-header">
         <h1>{{ title }}</h1>
         <h4>{{ points }} points</h4>
@@ -31,6 +32,8 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../styles/colors.scss';
+
   .problem-header {
     text-align: center;
   }
@@ -50,7 +53,7 @@ export default {
 
   .modal {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
@@ -60,6 +63,18 @@ export default {
     margin: 1em;
     background-color: white;
     box-shadow: darken(white, 30%) 0.2em 0.2em;
+
+    .close {
+      color: $primary;
+      position: absolute;
+      top: 0.1em;
+      right: 0.5em;
+      font-size: 2em;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     h1 {
       margin-bottom: 0;
