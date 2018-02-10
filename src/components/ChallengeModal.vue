@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-container" :class="{ 'hidden': !open }">
+  <div v-esc="close" class="modal-container" :class="{ 'hidden': !open }">
     <div class="modal">
       <div @click="open = false" class="close">&times;</div>
       <div class="problem-header">
@@ -26,6 +26,11 @@ export default {
   data () {
     return {
       open: false
+    }
+  },
+  methods: {
+    close () {
+      this.open = false
     }
   }
 }
@@ -123,6 +128,30 @@ export default {
           height: 100%;
           position: relative;
           bottom: 0.3em;
+        }
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 60vw;
+      height: 60vh;
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      overflow: scroll;
+
+      .flag-input {
+        display: block;
+        input {
+          height: 1.5em;
+          width: 97%;
+        }
+        .submit {
+          width: 100%;
+          margin-left: 0;
+          button {
+            width: 100%;
+          }
         }
       }
     }

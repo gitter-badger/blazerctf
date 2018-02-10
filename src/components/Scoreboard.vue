@@ -62,7 +62,7 @@ export default {
   @import '../styles/colors.scss';
 
   .scoreboard {
-    font-size: 1.3em;
+    font-size: 1em;
     width: 100%;
 
     tr {
