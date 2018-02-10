@@ -39,6 +39,7 @@ export default {
     h1, h4 {
       font-weight: 200;
     }
+    border-radius: 1em;
     font-size: 1em;
     text-align: center;
     padding: 1em;

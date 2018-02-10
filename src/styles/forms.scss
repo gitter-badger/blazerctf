@@ -16,6 +16,8 @@
 
   input[type="text"], input[type="password"], input[type="email"] {
     width: 100%;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
   }
 
   input[type="text"], input[type="password"], input[type="email"], button {

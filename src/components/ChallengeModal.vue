@@ -75,7 +75,8 @@ export default {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     z-index: 2;
-    padding: 2em;
+    padding: 3em;
+    border-radius: 1em;
     min-height: 30vh;
     max-width: 30em;
     background-color: white;
@@ -84,7 +85,7 @@ export default {
       color: $primary;
       position: fixed;
       top: 0.1em;
-      right: 0.5em;
+      right: 0.6em;
       font-size: 2em;
 
       &:hover {
