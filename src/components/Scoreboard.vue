@@ -77,9 +77,30 @@ export default {
     }
 
     &, th, td {
-      padding-left: 0.5em;
-      border-bottom: 1px solid black;
+      padding: 0.5em;
       border-collapse: collapse;
+    }
+
+    @media only screen and (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead tr {
+        display: none;
+      }
+
+      td {
+        poistion: relative;
+      }
+
+      td:nth-of-type(1) {
+        font-weight: 400;
+
+        &:before { content: "#" }
+      }
+      td:nth-of-type(4):after { content: " points" }
+
     }
   }
 </style>

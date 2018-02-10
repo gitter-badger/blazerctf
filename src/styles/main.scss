@@ -8,6 +8,10 @@ html, body {
 
 .container {
   margin: 10vh 10vw 0 10vw;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 5em;
+  }
 }
 
 .hidden {

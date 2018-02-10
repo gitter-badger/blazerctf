@@ -12,11 +12,12 @@ export default {
   props: [
     'title',
     'points',
-    'category'
+    'category',
+    'index'
   ],
   methods: {
     openModal () {
-      this.$parent.$children[1].open = true
+      this.$parent.$refs['modal' + this.index.toString()][0].open = true
     }
   }
 }
@@ -24,6 +25,7 @@ export default {
 
 <style lang="scss">
   .challenge {
+    font-size: 0.8em;
     text-align: center;
     padding: 1em;
     min-height: 9em;

@@ -8,7 +8,7 @@
         <h4>{{ category }}</h4>
       </div>
       <div class="description"><p>{{ description }}</p></div>
-      <div class="flag-input"><label>Flag: </label><input type="text" placeholder="flag{}"><div class="submit"><button>Submit</button></div></div>
+      <div class="flag-input"><input type="text" placeholder="flag{}"><div class="submit"><button>Submit</button></div></div>
     </div>
     <div class="modal-bg" @click="open = false"></div>
   </div>
@@ -41,7 +41,7 @@ export default {
   .modal-container {
     width: 100vw;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     margin: auto;
@@ -51,7 +51,7 @@ export default {
     height: 100vh;
     width: 100vw;
     background-color: rgba(200, 200, 200, 0.8);
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -61,7 +61,7 @@ export default {
   }
 
   .modal {
-    position: absolute;
+    position: fixed;
     top: 48%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
@@ -74,7 +74,7 @@ export default {
 
     .close {
       color: $primary;
-      position: absolute;
+      position: fixed;
       top: 0.1em;
       right: 0.5em;
       font-size: 2em;
@@ -95,6 +95,8 @@ export default {
     }
 
     .flag-input {
+      font-size: 1.5em;
+
       display: flex;
       label {
         margin-right: 0.5em;
@@ -103,9 +105,16 @@ export default {
       input {
         flex: 2;
       }
-    }
-    .submit {
-      margin-left: 0.5em;
+
+      .submit {
+        margin-left: 0.3em;
+
+        button {
+          height: 100%;
+          position: relative;
+          bottom: 0.3em;
+        }
+      }
     }
   }
 </style>
