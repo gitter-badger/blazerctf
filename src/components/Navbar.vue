@@ -39,7 +39,7 @@ export default {
     display: flex;
     position: absolute;
     top: 0;
-    background-color: #c84b4b;
+    background-color: saturate(lighten($primary, 5%), 10%);
     width: 100%;
     height: 3em;
     text-align: left;
@@ -68,7 +68,7 @@ export default {
     }
 
     .item {
-      background-color: #c84b4b;
+      background-color: saturate(lighten($primary, 5%), 10%);
       height: 3em;
       display: flex;
       align-items: center;

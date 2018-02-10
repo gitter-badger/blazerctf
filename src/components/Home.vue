@@ -133,12 +133,14 @@
 </template>
 
 <style lang="scss">
+  @import "../styles/colors.scss";
+
   .cls-1 {
     fill: #fff;
   }
 
   .cls-2 {
-    fill: #ba4343;
+    fill: $primary;
   }
 
   .cls-3 {
@@ -146,7 +148,7 @@
   }
 
   .cls-4 {
-    fill: #6b2a2a;
+    fill: $primary;
   }
 
   .cls-5 {

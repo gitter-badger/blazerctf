@@ -24,12 +24,26 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../styles/colors.scss';
+
   .challenge {
-    font-size: 0.8em;
+    h1 {
+      font-size: 1.5em;
+    }
+
+    h4 {
+      margin: 0;
+      margin-top: 0.5em;
+    }
+
+    h1, h4 {
+      font-weight: 200;
+    }
+    font-size: 1em;
     text-align: center;
     padding: 1em;
     min-height: 9em;
-    max-width: 18em;
+    max-width: 14em;
     margin: 1em;
     background-color: rgba(230, 230, 230, 0.5);
     box-shadow: rgba(200, 200, 200, 0.8) 0.2em 0.2em;

@@ -3,7 +3,7 @@
     <div class="modal">
       <div @click="open = false" class="close">&times;</div>
       <div class="problem-header">
-        <h1>{{ title }}</h1>
+        <h1>{{ title }}</h1><br>
         <h4>{{ points }} points</h4>
         <h4>{{ category }}</h4>
       </div>
@@ -61,6 +61,15 @@ export default {
   }
 
   .modal {
+    h1, h4 {
+      font-weight: 200;
+    }
+
+    h4 {
+      margin: 0;
+      margin-top: 0.5em;
+    }
+
     position: fixed;
     top: 48%;
     left: 50%;
@@ -70,7 +79,6 @@ export default {
     min-height: 30vh;
     max-width: 30em;
     background-color: white;
-    box-shadow: darken(white, 30%) 0.2em 0.2em;
 
     .close {
       color: $primary;
@@ -90,11 +98,12 @@ export default {
 
     .description {
       display: flex;
-      margin-bottom: 1em;
+      margin: 1.5em 0;
       align-items: center;
     }
 
     .flag-input {
+
       font-size: 1.5em;
 
       display: flex;
