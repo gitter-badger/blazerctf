@@ -118,6 +118,7 @@ export default {
       }
 
       input {
+        font-size: 0.6em;
         flex: 2;
       }
 
@@ -125,9 +126,10 @@ export default {
         margin-left: 0.3em;
 
         button {
+          font-size: 0.6em;
           height: 100%;
           position: relative;
-          bottom: 0.3em;
+          bottom: 0.25em;
         }
       }
     }
@@ -143,6 +145,7 @@ export default {
       .flag-input {
         display: block;
         input {
+          font-size: 0.8em;
           height: 1.5em;
           width: 97%;
         }
@@ -150,6 +153,9 @@ export default {
           width: 100%;
           margin-left: 0;
           button {
+            padding: 0.1em;
+            margin-top: 0.5em;
+            font-size: 0.8em;
             width: 100%;
           }
         }
