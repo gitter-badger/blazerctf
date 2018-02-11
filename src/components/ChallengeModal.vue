@@ -140,7 +140,7 @@ export default {
       position: fixed;
       left: 50%;
       top: 50%;
-      overflow: scroll;
+      overflow: auto;
 
       .flag-input {
         display: block;
