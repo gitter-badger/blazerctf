@@ -4,20 +4,19 @@
     <div @click="toggle" class="hamburger">
       <div></div>
     </div>
-    <router-link @click.native="collapse" class="item" :class="{collapsed: collapsed}" to="/about">About</router-link>
-    <router-link @click.native="collapse" class="item" :class="{collapsed: collapsed}" to="/challenges">Challenges</router-link>
-    <router-link @click.native="collapse" class="item" :class="{collapsed: collapsed}" to="/scoreboard">Scoreboard</router-link>
-    <router-link @click.native="collapse" class="item right-divide" :class="{collapsed: collapsed}" to="/login">Login</router-link>
-    <router-link @click.native="collapse" class="item" :class="{collapsed: collapsed}" to="/signup">Signup</router-link>
+    <router-link v-for="page in pages" v-if="!page.hidden"  @click.native="collapse" class="item" :class="{collapsed: collapsed, 'right-divide': page.rightdivide}" :to="page.route.path">{{ page.route.name }}</router-link>
   </nav>
 </template>
 
 <script>
+import config from '@/config.js'
+
 export default {
   name: 'Navbar',
   data () {
     return {
-      collapsed: true
+      collapsed: true,
+      pages: config.pages
     }
   },
   methods: {
