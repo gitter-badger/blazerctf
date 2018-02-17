@@ -38,7 +38,7 @@ export default {
     display: flex;
     position: absolute;
     top: 0;
-    background-color: saturate(lighten($primary, 5%), 10%);
+    background-color: $primary;
     width: 100%;
     height: 3em;
     text-align: left;
@@ -67,7 +67,7 @@ export default {
     }
 
     .item {
-      background-color: saturate(lighten($primary, 5%), 10%);
+      background-color: $primary;
       height: 3em;
       display: flex;
       align-items: center;
@@ -80,7 +80,7 @@ export default {
       }
 
       &:hover {
-        background-color: $primary;
+        background-color: darken($primary, 3%);
       }
 
       @media screen and (max-width: 700px) {

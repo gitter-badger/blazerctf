@@ -1,5 +1,5 @@
 .form {
-  margin: 0 20vw;
+  margin: 0 15vw;
 
   @media screen and (max-width: 768px) {
     margin: 0;
@@ -82,7 +82,6 @@ button {
   color: white;
 
   padding: 0.2em 0.5em;
-  padding-bottom: 0.4em;
 
   &:hover {
     cursor: pointer;
