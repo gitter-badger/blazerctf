@@ -27,14 +27,16 @@ export default {
         path: '/challenges',
         name: 'Challenges',
         component: Challenges
-      }
+      },
+      competition: true
     },
     {
       route: {
         path: '/scoreboard',
         name: 'Scoreboard',
         component: Scoreboard
-      }
+      },
+      competition: true
     },
     {
       route: {
@@ -42,14 +44,22 @@ export default {
         name: 'Login',
         component: Login
       },
-      rightdivide: true
+      rightdivide: true,
+      registration: true
     },
     {
       route: {
         path: '/signup',
         name: 'Signup',
         component: Signup
-      }
+      },
+      registration: true
     }
-  ]
+  ],
+  competition: {
+    start: 0,
+    end: Infinity,
+    name: 'BlazerCTF',
+    registration: false
+  }
 }

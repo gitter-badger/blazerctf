@@ -118,7 +118,7 @@ export default {
       }
 
       input {
-        font-size: 0.6em;
+        font-size: 1rem;
         flex: 2;
       }
 
@@ -126,10 +126,11 @@ export default {
         margin-left: 0.3em;
 
         button {
-          font-size: 0.6em;
+          font-size: 1rem;
           height: 100%;
           position: relative;
-          bottom: 0.25em;
+          bottom: 0.15em;
+          padding-bottom: 0.3em;
         }
       }
     }

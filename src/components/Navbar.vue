@@ -1,10 +1,10 @@
 <template>
   <nav class="navbar">
-    <router-link @click.native="collapse" class="item" to="/">BlazerCTF</router-link>
+    <router-link @click.native="collapse" class="item" to="/">{{ config.competition.name }}</router-link>
     <div @click="toggle" class="hamburger">
       <div></div>
     </div>
-    <router-link v-for="page in pages" v-if="!page.hidden"  @click.native="collapse" class="item" :class="{collapsed: collapsed, 'right-divide': page.rightdivide}" :to="page.route.path">{{ page.route.name }}</router-link>
+    <router-link v-for="page in config.pages" v-if="!page.hidden && (!page.competition || config.competition.start<=+new Date() && config.competition.end>=+new Date()) && (!page.registration || config.competition.registration)"  @click.native="collapse" class="item" :class="{collapsed: collapsed, 'right-divide': page.rightdivide}" :to="page.route.path">{{ page.route.name }}</router-link>
   </nav>
 </template>
 
@@ -16,7 +16,7 @@ export default {
   data () {
     return {
       collapsed: true,
-      pages: config.pages
+      config: config
     }
   },
   methods: {
