@@ -57,7 +57,7 @@ export default {
     }
   ],
   competition: {
-    start: 0,
+    start: Infinity,
     end: Infinity,
     name: 'BlazerCTF',
     registration: false
