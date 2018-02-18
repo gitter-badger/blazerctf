@@ -17,6 +17,8 @@
     <ul>
       <li v-for="member in team.members">{{ member.username }}</li>
     </ul>
+    <h3>Eligible</h3>
+    <p>{{ team.eligible ? "Yes" : "No" }}</p>
   </div>
 </div>
 </template>
@@ -44,19 +46,17 @@ export default {
   data () {
     return {
       teamname: null,
-      passcode: null,
-      hasTeam: null,
-      team: {
-        name: null,
-        passcode: null,
-        members: [],
-        school: null,
-        score: null
-      }
+      passcode: null
     }
   },
+  props: [
+    'hasTeam',
+    'loggedIn',
+    'updateAll',
+    'team'
+  ],
   mounted () {
-    this.update()
+    this.updateAll()
   },
   methods: {
     join () {
@@ -64,7 +64,7 @@ export default {
         name: this.teamname,
         passcode: this.passcode
       }, { withCredentials: true }).then(function (response) {
-        this.update()
+        this.updateAll()
       }.bind(this))
     },
     create () {
@@ -72,17 +72,7 @@ export default {
         name: this.teamname,
         passcode: this.passcode
       }, { withCredentials: true }).then(function (response) {
-        this.update()
-      }.bind(this))
-    },
-    update () {
-      axios.get(config.api_url + '/teams/self', { withCredentials: true }).then(function (response) {
-        if (response.status === 200) {
-          this.hasTeam = true
-          this.team = response.data
-        }
-      }.bind(this)).catch(function (error) {
-        this.hasTeam = false
+        this.updateAll()
       }.bind(this))
     }
   }

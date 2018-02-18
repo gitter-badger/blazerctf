@@ -30,9 +30,15 @@ export default {
       }
     }
   },
+  props: [
+    'updateAll'
+  ],
   methods: {
     login () {
-      axios.post(config.api_url + '/auth', this.formData, {withCredentials: true})
+      axios.post(config.api_url + '/auth', this.formData, {withCredentials: true}).then(function () {
+        this.updateAll()
+        this.$router.push('/')
+      }.bind(this))
     }
   }
 }

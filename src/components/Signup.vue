@@ -39,9 +39,15 @@ export default {
       }
     }
   },
+  props: [
+    'updateAll'
+  ],
   methods: {
     signup () {
-      axios.post(config.api_url + '/users', this.formData)
+      axios.post(config.api_url + '/users', this.formData).then(function () {
+        this.updateAll()
+        this.$router.push('login')
+      }.bind(this))
     }
   }
 }

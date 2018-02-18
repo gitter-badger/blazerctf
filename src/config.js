@@ -29,7 +29,8 @@ export default {
         name: 'Challenges',
         component: Challenges
       },
-      competition: true
+      competition: true,
+      team: true
     },
     {
       route: {
@@ -44,6 +45,7 @@ export default {
         name: 'Team',
         component: Team
       },
+      loggedIn: true,
       rightdivide: true
     },
     {
@@ -52,6 +54,7 @@ export default {
         name: 'Login',
         component: Login
       },
+      rightdivide: true,
       registration: true
     },
     {

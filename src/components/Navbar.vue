@@ -4,7 +4,8 @@
     <div @click="toggle" class="hamburger">
       <div></div>
     </div>
-    <router-link v-for="page in config.pages" v-if="!page.hidden && (!page.competition || config.competition.start<=+new Date() && config.competition.end>=+new Date()) && (!page.registration || config.competition.registration)"  @click.native="collapse" class="item" :class="{collapsed: collapsed, 'right-divide': page.rightdivide}" :to="page.route.path">{{ page.route.name }}</router-link>
+    <router-link v-for="page in config.pages" v-show="hasTeam != null && ((!page.team && !page.registration && !page.loggedIn) || (!loggedIn && page.registration) || (hasTeam && page.team) || (loggedIn && page.loggedIn))" v-if="!page.hidden && (!page.competition || config.competition.start<=+new Date() && config.competition.end>=+new Date()) && (!page.registration || config.competition.registration)"  @click.native="collapse" class="item" :class="{collapsed: collapsed, 'right-divide': page.rightdivide}" :to="page.route.path">{{ page.route.name }}</router-link>
+    <a :class="{collapsed: collapsed}" v-if="loggedIn" class="item" @click="logout">Logout</a>
   </nav>
 </template>
 
@@ -13,6 +14,11 @@ import config from '@/config.js'
 
 export default {
   name: 'Navbar',
+  props: [
+    'hasTeam',
+    'loggedIn',
+    'updateAll'
+  ],
   data () {
     return {
       collapsed: true,
@@ -25,6 +31,11 @@ export default {
     },
     toggle () {
       this.collapsed = !this.collapsed
+    },
+    logout () {
+      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 GMT'
+      this.updateAll()
+      this.$router.push('/login')
     }
   }
 }
@@ -81,6 +92,7 @@ export default {
 
       &:hover {
         background-color: darken($primary, 3%);
+        cursor: pointer;
       }
 
       @media screen and (max-width: 700px) {
