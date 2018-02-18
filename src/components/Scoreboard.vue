@@ -14,8 +14,8 @@
         <tr v-for="team in teams">
           <td>{{ team.place }}</td>
           <td>{{ team.name }}</td>
-          <td>{{ team.school }}</td>
-          <td>{{ team.points }}</td>
+          <td>{{ team.school ? team.school : "―" }}</td>
+          <td>{{ team.score }}</td>
         </tr>
       </tbody>
     </table>
@@ -23,37 +23,26 @@
 </template>
 
 <script>
+import config from '@/config.js'
+import axios from 'axios'
+
 export default {
   name: 'scoreboard',
   data () {
     return {
-      teams: [{
-        place: 1,
-        name: 'First Example Team',
-        school: 'Fake School',
-        points: 987
-      }, {
-        place: 2,
-        name: 'Second Example Team',
-        school: 'Not A Real School',
-        points: 923
-      }, {
-        place: 3,
-        name: 'Third Example Team',
-        school: 'Nonexistant School',
-        points: 642
-      }, {
-        place: 4,
-        name: 'Fourth Example Team',
-        school: 'School That Doesn\'t Exist',
-        points: 12
-      }, {
-        place: 5,
-        name: 'Fifth Example Team',
-        school: 'No School',
-        points: 3
-      }]
+      teams: []
     }
+  },
+  methods: {
+    update () {
+      axios.get(config.api_url + '/teams').then(function (response) {
+        this.teams = response.data
+      }.bind(this))
+    }
+  },
+  mounted () {
+    this.update()
+    setInterval(this.update, 10000)
   }
 }
 </script>

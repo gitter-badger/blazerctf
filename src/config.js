@@ -2,6 +2,7 @@ import Home from '@/components/Home'
 import About from '@/components/About'
 import Challenges from '@/components/Challenges'
 import Scoreboard from '@/components/Scoreboard'
+import Team from '@/components/Team'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
 
@@ -35,8 +36,15 @@ export default {
         path: '/scoreboard',
         name: 'Scoreboard',
         component: Scoreboard
+      }
+    },
+    {
+      route: {
+        path: '/team',
+        name: 'Team',
+        component: Team
       },
-      competition: true
+      rightdivide: true
     },
     {
       route: {
@@ -44,7 +52,6 @@ export default {
         name: 'Login',
         component: Login
       },
-      rightdivide: true,
       registration: true
     },
     {
@@ -60,6 +67,7 @@ export default {
     start: Infinity,
     end: Infinity,
     name: 'BlazerCTF',
-    registration: false
-  }
+    registration: true
+  },
+  api_url: 'http://localhost:3000'
 }

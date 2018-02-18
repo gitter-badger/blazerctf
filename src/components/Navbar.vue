@@ -56,7 +56,7 @@ export default {
         background-color: white;
       }
       position: absolute;
-      right: 0.5em;
+      right: 0.7em;
       top: 48%;
       transform: translateY(-50%);
       z-index: 1000;
