@@ -2,6 +2,7 @@
 <div class="container">
   <h1 class="center">Team</h1>
   <div class="form" v-if="hasTeam == false">
+    <p class="error" v-if="error">{{ error }}</p>
     <label>Team Name:</label><br>
     <input v-model="teamname" type="text" placeholder="team name">
     <label>Passcode:</label><br>
@@ -33,9 +34,6 @@
   h3 {
     margin-bottom: -0.6em;
   }
-  p {
-    margin-left: 1em;
-  }
 </style>
 
 <script>
@@ -46,7 +44,8 @@ export default {
   data () {
     return {
       teamname: null,
-      passcode: null
+      passcode: null,
+      error: false
     }
   },
   props: [
@@ -60,20 +59,36 @@ export default {
   },
   methods: {
     join () {
-      axios.patch(config.api_url + '/teams', {
-        name: this.teamname,
-        passcode: this.passcode
-      }, { withCredentials: true }).then(function (response) {
-        this.updateAll()
-      }.bind(this))
+      if (this.teamname && this.passcode) {
+        axios.patch(config.api_url + '/teams', {
+          name: this.teamname,
+          passcode: this.passcode
+        }, {withCredentials: true}).then(function (response) {
+          this.updateAll()
+        }.bind(this)).catch(function () {
+          this.setError('Invalid team name or passcode.')
+        }.bind(this))
+      } else {
+        this.setError('Fill out all required fields.')
+      }
     },
     create () {
-      axios.post(config.api_url + '/teams', {
-        name: this.teamname,
-        passcode: this.passcode
-      }, { withCredentials: true }).then(function (response) {
-        this.updateAll()
-      }.bind(this))
+      if (this.teamname && this.passcode) {
+        axios.post(config.api_url + '/teams', {
+          name: this.teamname,
+          passcode: this.passcode
+        }, { withCredentials: true }).then(function (response) {
+          this.updateAll()
+        }.bind(this)).catch(function () {
+          this.setError('Team already exists.')
+        }.bind(this))
+      } else {
+        this.setError('Fill out all required fields.')
+      }
+    },
+    setError (message) {
+      setTimeout(function () { this.error = message }.bind(this), this.error ? 200 : 0)
+      this.error = false
     }
   }
 }
