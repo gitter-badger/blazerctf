@@ -46,7 +46,7 @@ export default {
     min-height: 9em;
     max-width: 14em;
     margin: 1em;
-    background-color: rgba(230, 230, 230, 0.5);
+    background-color: rgba(250, 250, 250, 1);
     box-shadow: rgba(200, 200, 200, 0.8) 0.2em 0.2em;
 
     &:hover {
