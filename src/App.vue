@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar :updateAll="update" :loggedIn="loggedIn" :hasTeam="hasTeam"></navbar>
-    <router-view :team="team" :updateAll="update" :loggedIn="loggedIn" :hasTeam="hasTeam"/>
+    <router-view :user="user" :team="team" :updateAll="update" :loggedIn="loggedIn" :hasTeam="hasTeam"/>
   </div>
 </template>
 
@@ -16,12 +16,20 @@ export default {
     return {
       hasTeam: null,
       loggedIn: null,
+      user: {
+        username: null,
+        id: null,
+        eligible: null,
+        team: null
+      },
       team: {
         name: null,
         passcode: null,
         members: [],
-        school: null,
-        score: null
+        affiliation: null,
+        score: null,
+        id: null,
+        eligible: null
       }
     }
   },
@@ -30,6 +38,18 @@ export default {
   },
   methods: {
     update () {
+      axios.get(config.api_url + '/users/self', { withCredentials: true }).then(function (response) {
+        if (response.status === 200) {
+          this.loggedIn = true
+          console.log(response)
+          this.user = response.data
+        }
+      }.bind(this)).catch(function (error) {
+        if (error) {
+          this.loggedIn = false
+        }
+      }.bind(this))
+
       axios.get(config.api_url + '/teams/self', { withCredentials: true }).then(function (response) {
         if (response.status === 200) {
           this.hasTeam = true

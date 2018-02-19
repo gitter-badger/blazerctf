@@ -2,7 +2,7 @@ import Home from '@/components/Home'
 import About from '@/components/About'
 import Challenges from '@/components/Challenges'
 import Scoreboard from '@/components/Scoreboard'
-import Team from '@/components/Team'
+import Profile from '@/components/Profile'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
 
@@ -41,9 +41,9 @@ export default {
     },
     {
       route: {
-        path: '/team',
-        name: 'Team',
-        component: Team
+        path: '/profile',
+        name: 'Profile',
+        component: Profile
       },
       loggedIn: true,
       rightdivide: true

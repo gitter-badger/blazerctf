@@ -14,7 +14,7 @@
         <tr v-for="team in teams">
           <td>{{ team.place }}</td>
           <td>{{ team.name }}</td>
-          <td>{{ team.school ? team.school : "―" }}</td>
+          <td>{{ team.affiliation ? team.affiliation : "―" }}</td>
           <td>{{ team.score }}</td>
         </tr>
       </tbody>

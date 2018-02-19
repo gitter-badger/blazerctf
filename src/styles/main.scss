@@ -17,3 +17,36 @@ html, body {
 .hidden {
   display: none !important;
 }
+
+.tabs {
+  width: 100%;
+  margin-bottom: 0.5em;
+
+  .tab {
+    display: inline-block;
+    padding: 0.5em 1em;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.active {
+      border-bottom: 0.1em solid $primary;
+      background-color: rgba(250, 250, 250, 1);
+      border-radius: 0.5em 0.5em 0 0;
+    }
+  }
+}
+
+.card {
+  margin: auto;
+  max-width: 50em;
+  border-radius: 1em;
+  padding: 1em 2em;
+  box-shadow: 0 0 1px 2px rgba(200, 200, 200, 1);
+  margin-bottom: 1.5em;
+
+  h2 {
+    margin-top: 0.2em;
+  }
+}
