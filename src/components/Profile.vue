@@ -6,7 +6,6 @@
       <div class="tab" :class="{ 'active': tab === 'join' }" @click="tab = 'join'">Join Team</div><!--
       --><div class="tab" :class="{ 'active': tab === 'create' }" @click="tab = 'create'">Create Team</div>
     </div>
-    <p class="error" v-if="error">{{ error }}</p>
     <label>Team Name:</label><br>
     <input v-model="teamname" type="text" placeholder="team name">
     <label v-if="tab === 'create'">School:</label>
@@ -82,7 +81,6 @@ export default {
       teamname: null,
       passcode: null,
       school: null,
-      error: false,
       tab: 'join'
     }
   },
@@ -91,7 +89,8 @@ export default {
     'loggedIn',
     'updateAll',
     'team',
-    'user'
+    'user',
+    'toast'
   ],
   mounted () {
     this.updateAll()
@@ -105,10 +104,10 @@ export default {
         }, {withCredentials: true}).then(function (response) {
           this.updateAll()
         }.bind(this)).catch(function () {
-          this.setError('Invalid team name or passcode.')
+          this.toast('Invalid team name or passcode.')
         }.bind(this))
       } else {
-        this.setError('Fill out all required fields.')
+        this.toast('Fill out all required fields.')
       }
     },
     create () {
@@ -120,15 +119,11 @@ export default {
         }, { withCredentials: true }).then(function (response) {
           this.updateAll()
         }.bind(this)).catch(function () {
-          this.setError('Team already exists.')
+          this.toast('Team already exists.')
         }.bind(this))
       } else {
-        this.setError('Fill out all required fields.')
+        this.toast('Fill out all required fields.')
       }
-    },
-    setError (message) {
-      setTimeout(function () { this.error = message }.bind(this), this.error ? 200 : 0)
-      this.error = false
     }
   }
 }

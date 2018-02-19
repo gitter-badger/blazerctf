@@ -72,7 +72,7 @@ export default {
       border-collapse: collapse;
     }
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 767px) {
       table, thead, tbody, th, td, tr {
         display: block;
       }

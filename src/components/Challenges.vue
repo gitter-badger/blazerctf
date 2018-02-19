@@ -4,7 +4,7 @@
     <div class="challenges">
       <div v-for="(challenge, index) in challenges" class="challenge-group">
         <challenge :index="index" :title="challenge.title" :points="challenge.value" :category="challenge.category"></challenge>
-        <challenge-modal :ref="'modal'+index.toString()" :title="challenge.title" :points="challenge.value" :category="challenge.category" :description="challenge.description"></challenge-modal>
+        <challenge-modal :toast="toast" :id="challenge.id" :ref="'modal'+index.toString()" :title="challenge.title" :points="challenge.value" :category="challenge.category" :description="challenge.description"></challenge-modal>
       </div>
     </div>
   </div>
@@ -22,6 +22,9 @@ export default {
     Challenge: Challenge,
     ChallengeModal: ChallengeModal
   },
+  props: [
+    'toast'
+  ],
   data () {
     return {
       challenges: []

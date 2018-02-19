@@ -8,29 +8,45 @@
         <h4>{{ category }}</h4>
       </div>
       <div class="description"><p>{{ description }}</p></div>
-      <div class="flag-input"><input type="text" placeholder="flag{}"><div class="submit"><button>Submit</button></div></div>
+      <div class="flag-input"><input v-model="flag" type="text" @keydown.enter="submit" placeholder="flag{}"><div class="submit"><button @click="submit">Submit</button></div></div>
     </div>
     <div class="modal-bg" @click="open = false"></div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+import config from '../config'
+
 export default {
   name: 'ChallengeModal',
   props: [
     'title',
     'points',
     'category',
-    'description'
+    'description',
+    'id',
+    'toast'
   ],
   data () {
     return {
-      open: false
+      open: false,
+      flag: ''
     }
   },
   methods: {
     close () {
       this.open = false
+    },
+    submit () {
+      axios.post(config.api_url + '/challenges/' + this.id.toString() + '/submissions', { flag: this.flag }).then(function (response) {
+        if (response.data.correct) {
+          this.toast('Nice! You got it.')
+        } else {
+          this.toast('Nope, that\'s not it.')
+        }
+        this.flag = ''
+      }.bind(this))
     }
   }
 }
@@ -129,7 +145,7 @@ export default {
           font-size: 1rem;
           height: 100%;
           position: relative;
-          bottom: 0.15em;
+          bottom: 0.1em;
           padding-bottom: 0.3em;
         }
       }

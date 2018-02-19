@@ -2,7 +2,6 @@
   <div class="container">
     <div class="form">
       <h1>Signup</h1>
-      <p v-if="error" class="error">{{ error }}</p>
       <label>Email:</label>
       <input v-model="formData.email" type="email" placeholder="email">
       <label>Username:</label><br>
@@ -38,19 +37,15 @@ export default {
         password: null,
         eligible: false
       },
-      confirmPassword: null,
-      error: false
+      confirmPassword: null
     }
   },
   props: [
-    'updateAll'
+    'updateAll',
+    'toast'
   ],
   methods: {
     signup () {
-      var elapsed = false
-      if (!this.error) { elapsed = true }
-      this.error = false
-      setTimeout(function () { elapsed = true }, 100)
       if (this.formData.email && this.formData.username && this.formData.password && this.confirmPassword) {
         if (this.formData.password === this.confirmPassword) {
           if (/\S+@\S+\.\S+/.test(this.formData.email)) {
@@ -58,21 +53,17 @@ export default {
               this.updateAll()
               this.$router.push('login')
             }.bind(this)).catch(function () {
-              this.setError('Username or email address already in use.', true, elapsed)
+              this.toast('Username or email address already in use.')
             }.bind(this))
           } else {
-            this.setError('Invalid email address.', true, elapsed)
+            this.toast('Invalid email address.')
           }
         } else {
-          this.setError('Passwords do not match.', true, elapsed)
+          this.toast('Passwords do not match.')
         }
       } else {
-        this.setError('Fill out all required fields.', true, elapsed)
+        this.toast('Fill out all required fields.')
       }
-    },
-    setError (message, delayed, elapsed) {
-      setTimeout(function () { this.error = message }.bind(this), delayed && !elapsed ? 200 : 0)
-      this.error = false
     }
   }
 }

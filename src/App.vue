@@ -1,12 +1,14 @@
 <template>
   <div id="app">
     <navbar :updateAll="update" :loggedIn="loggedIn" :hasTeam="hasTeam"></navbar>
-    <router-view :user="user" :team="team" :updateAll="update" :loggedIn="loggedIn" :hasTeam="hasTeam"/>
+    <router-view :toast="toast" :user="user" :team="team" :updateAll="update" :loggedIn="loggedIn" :hasTeam="hasTeam"/>
+    <toast ref="toast"></toast>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
+import Toast from '@/components/Toast'
 import axios from 'axios'
 import config from './config'
 
@@ -34,7 +36,8 @@ export default {
     }
   },
   components: {
-    Navbar: Navbar
+    Navbar: Navbar,
+    Toast: Toast
   },
   methods: {
     update () {
@@ -64,6 +67,9 @@ export default {
         }
         this.hasTeam = false
       }.bind(this))
+    },
+    toast (message) {
+      this.$refs.toast.show(message)
     }
   },
   mounted () {
