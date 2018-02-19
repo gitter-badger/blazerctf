@@ -39,7 +39,7 @@ export default {
         eligible: false
       },
       confirmPassword: null,
-      error: false,
+      error: false
     }
   },
   props: [
