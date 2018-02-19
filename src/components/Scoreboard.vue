@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Scoreboard</h1>
-    <table class="scoreboard">
+    <table class="scoreboard" v-if="teamsLoaded">
       <thead>
         <tr>
           <th>#</th>
@@ -30,13 +30,15 @@ export default {
   name: 'scoreboard',
   data () {
     return {
-      teams: []
+      teams: [],
+      teamsLoaded: false
     }
   },
   methods: {
     update () {
       axios.get(config.api_url + '/teams').then(function (response) {
         this.teams = response.data
+        this.teamsLoaded = true
       }.bind(this))
     }
   },
