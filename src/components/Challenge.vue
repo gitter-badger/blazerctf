@@ -36,7 +36,7 @@ export default {
       background-color: $primary;
 
       h1, h4 {
-        color: white;
+        color: $secondary;
       }
 
       box-shadow: darken($primary, 10%) 0.2em 0.2em;

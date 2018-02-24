@@ -113,10 +113,6 @@ export default {
         display: none;
       }
 
-      td {
-        poistion: relative;
-      }
-
       td:nth-of-type(1) {
         font-weight: 400;
 
