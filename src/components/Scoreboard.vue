@@ -1,6 +1,15 @@
 <template>
   <div class="container">
     <h1>Scoreboard</h1>
+    <div class="checkbox-container form">
+      <div class="checkbox">
+        <input v-model="showIneligible" type="checkbox" id="ineligible">
+        <label @click="update" for="ineligible">
+          <span class="check"></span>
+        </label>
+      </div>
+      <span>Show ineligible teams.</span><br>
+    </div>
     <table class="scoreboard" v-if="teamsLoaded">
       <thead>
         <tr>
@@ -11,8 +20,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="team in teams">
-          <td>{{ team.place }}</td>
+        <tr v-for="(team, index) in teams">
+          <td>{{ index+1 }}</td>
           <td>{{ team.name }}</td>
           <td>{{ team.affiliation ? team.affiliation : "―" }}</td>
           <td>{{ team.score }}</td>
@@ -32,15 +41,25 @@ export default {
     return {
       teams: [],
       teamsLoaded: false,
-      updateInterval: null
+      updateInterval: null,
+      showIneligible: true
     }
   },
   methods: {
     update () {
       axios.get(config.api_url + '/teams').then(function (response) {
         this.teams = response.data
+        if (!this.showIneligible) {
+          this.teams = this.teams.filter(team => team.eligible)
+        }
         this.teamsLoaded = true
+        this.number()
       }.bind(this))
+    },
+    number () {
+      this.teams.sort(function (a, b) {
+        return b.score - a.score
+      })
     }
   },
   mounted () {
@@ -53,8 +72,16 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '../styles/colors.scss';
+
+  .form {
+    margin: 0;
+    .checkbox {
+      font-size: 0.6em;
+      bottom: 0.2em;
+    }
+  }
 
   .scoreboard {
     font-size: 1em;
