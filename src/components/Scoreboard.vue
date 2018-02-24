@@ -31,7 +31,8 @@ export default {
   data () {
     return {
       teams: [],
-      teamsLoaded: false
+      teamsLoaded: false,
+      updateInterval: null
     }
   },
   methods: {
@@ -44,7 +45,10 @@ export default {
   },
   mounted () {
     this.update()
-    setInterval(this.update, 10000)
+    this.updateInterval = setInterval(this.update, 10000)
+  },
+  beforeDestroy () {
+    clearInterval(this.updateInterval)
   }
 }
 </script>
