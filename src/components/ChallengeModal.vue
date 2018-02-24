@@ -41,7 +41,7 @@ export default {
       setTimeout(function () {
         this.closing = false
         this.open = false
-      }.bind(this), 100)
+      }.bind(this), 500)
     },
     submit () {
       axios.post(config.api_url + '/challenges/' + this.id.toString() + '/submissions', { flag: this.flag }).then(function (response) {
@@ -71,14 +71,30 @@ export default {
     top: 0;
     left: 0;
     margin: auto;
-    transition: opacity 0.1s;
+    .modal {
+      transition: top 0.5s;
+    }
+    .modal-bg {
+      transition: opacity 0.5s;
+    }
 
     &.closing {
-      opacity: 0;
+      .modal {
+        top: -48%;
+      }
+      .modal-bg {
+        opacity: 0;
+        pointer-events: none;
+      }
     }
 
     &.closed {
-      opacity: 0;
+      .modal {
+        top: -48%;
+      }
+      .modal-bg {
+        opacity: 0;
+      }
       visibility: hidden;
     }
   }
@@ -110,7 +126,7 @@ export default {
     top: 48%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
-    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0.5em 0.01em rgba(0, 0, 0, 0.2);
     z-index: 2;
     padding: 3em;
     border-radius: 1em;
