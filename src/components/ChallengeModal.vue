@@ -1,7 +1,7 @@
 <template>
-  <div v-esc="close" class="modal-container" :class="{ 'hidden': !open }">
+  <div v-esc="close" class="modal-container" :class="{ 'closed': !open, 'closing': closing }">
     <div class="modal">
-      <div @click="open = false" class="close">&times;</div>
+      <div @click="close" class="close">&times;</div>
       <div class="problem-header">
         <h1>{{ title }}</h1><br>
         <h4>{{ points }} points</h4>
@@ -10,7 +10,7 @@
       <div class="description"><p>{{ description }}</p></div>
       <div class="flag-input"><input v-model="flag" type="text" @keydown.enter="submit" placeholder="flag{}"><div class="submit"><button @click="submit">Submit</button></div></div>
     </div>
-    <div class="modal-bg" @click="open = false"></div>
+    <div class="modal-bg" @click="close"></div>
   </div>
 </template>
 
@@ -31,12 +31,17 @@ export default {
   data () {
     return {
       open: false,
+      closing: false,
       flag: ''
     }
   },
   methods: {
     close () {
-      this.open = false
+      this.closing = true
+      setTimeout(function () {
+        this.closing = false
+        this.open = false
+      }.bind(this), 100)
     },
     submit () {
       axios.post(config.api_url + '/challenges/' + this.id.toString() + '/submissions', { flag: this.flag }).then(function (response) {
@@ -66,6 +71,16 @@ export default {
     top: 0;
     left: 0;
     margin: auto;
+    transition: opacity 0.1s;
+
+    &.closing {
+      opacity: 0;
+    }
+
+    &.closed {
+      opacity: 0;
+      visibility: hidden;
+    }
   }
 
   .modal-bg {
@@ -95,6 +110,7 @@ export default {
     top: 48%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
+    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.2);
     z-index: 2;
     padding: 3em;
     border-radius: 1em;

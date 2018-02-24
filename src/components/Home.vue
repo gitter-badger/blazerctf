@@ -5,9 +5,6 @@
       <h4>Coming Summer 2018</h4>
     </div>
     <svg xmlns="http://www.w3.org/2000/svg" id="bg" viewBox="0 0 1641 616.11">
-      <g id="White_BG" data-name="White BG">
-        <rect class="cls-1" x="1" y="0.11" width="1640" height="616"/>
-      </g>
       <g id="Right_Wall" data-name="Right Wall">
         <polyline class="cls-2" points="1265.45 419.9 1515 432.8 1525 616.11 1264 616.11"/>
         <polyline class="cls-2" points="1525 616.11 1641 616.11 1641 389.16 1511.59 380.29 1307.38 420.81"/>
@@ -177,6 +174,9 @@
 
   .cls-11 {
     fill: #ededed;
+  }
+
+  #bg {
   }
 
   @media screen and (orientation: portrait) {

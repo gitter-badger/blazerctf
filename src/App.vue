@@ -44,7 +44,6 @@ export default {
       axios.get(config.api_url + '/users/self', { withCredentials: true }).then(function (response) {
         if (response.status === 200) {
           this.loggedIn = true
-          console.log(response)
           this.user = response.data
         }
       }.bind(this)).catch(function (error) {

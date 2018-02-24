@@ -55,6 +55,7 @@ export default {
   .scoreboard {
     font-size: 1em;
     width: 100%;
+    margin-bottom: 1em;
 
     tr {
       width: 100%;
@@ -63,7 +64,7 @@ export default {
 
     tbody tr {
       &:nth-child(odd) {
-        background: transparentize(#c8c8c8, .8);
+        background: $secondary;
       }
     }
 

@@ -40,6 +40,7 @@ export default {
         axios.post(config.api_url + '/auth', this.formData, {withCredentials: true}).then(function () {
           this.updateAll()
           this.$router.push('/')
+          this.toast('Successfully logged in!')
         }.bind(this)).catch(function (error) {
           if (error.response.status === 401) {
             this.toast('Wrong username or password.')

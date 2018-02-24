@@ -54,15 +54,16 @@
 
     h3, p {
       margin: 0.5em;
-      margin-top: 0.7em;
     }
 
     p {
-      margin-top: 0.5em;
+      position: relative;
+      bottom: 0.05em;
     }
 
     td {
       border-bottom: 1px solid rgb(170, 170, 170);
+      padding-top: 0.3em;
     }
 
     h3 {
