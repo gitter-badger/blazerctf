@@ -1,5 +1,5 @@
 <template>
-  <div class="challenge" @click="openModal">
+  <div class="challenge" :class="{ 'solved': solved }" @click="openModal">
     <h1>{{ title }}</h1>
     <h4>{{ points }} points</h4>
     <h4>{{ category }}</h4>
@@ -13,7 +13,8 @@ export default {
     'title',
     'points',
     'category',
-    'index'
+    'index',
+    'solved'
   ],
   methods: {
     openModal () {
@@ -29,6 +30,16 @@ export default {
   .challenge {
     h1 {
       font-size: 1.5em;
+    }
+
+    &.solved {
+      background-color: $primary;
+
+      h1, h4 {
+        color: $secondary;
+      }
+
+      box-shadow: darken($primary, 10%) 0.2em 0.2em;
     }
 
     h4 {

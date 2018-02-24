@@ -3,8 +3,8 @@
     <h1 class="center">Challenges</h1>
     <div class="challenges">
       <div v-for="(challenge, index) in challenges" class="challenge-group">
-        <challenge :index="index" :title="challenge.title" :points="challenge.value" :category="challenge.category"></challenge>
-        <challenge-modal :toast="toast" :id="challenge.id" :ref="'modal'+index.toString()" :title="challenge.title" :points="challenge.value" :category="challenge.category" :description="challenge.description"></challenge-modal>
+        <challenge :solved="challenge.solved" :index="index" :title="challenge.title" :points="challenge.value" :category="challenge.category"></challenge>
+        <challenge-modal :update="update" :solved="challenge.solved" :toast="toast" :id="challenge.id" :ref="'modal'+index.toString()" :title="challenge.title" :points="challenge.value" :category="challenge.category" :description="challenge.description"></challenge-modal>
       </div>
     </div>
   </div>
@@ -23,17 +23,23 @@ export default {
     ChallengeModal: ChallengeModal
   },
   props: [
-    'toast'
+    'toast',
+    'updateAll'
   ],
   data () {
     return {
       challenges: []
     }
   },
+  methods: {
+    update () {
+      axios.get(config.api_url + '/challenges').then(function (response) {
+        this.challenges = response.data
+      }.bind(this))
+    }
+  },
   created () {
-    axios.get(config.api_url + '/challenges').then(function (response) {
-      this.challenges = response.data
-    }.bind(this))
+    this.update()
   }
 }
 </script>

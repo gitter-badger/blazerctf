@@ -1,6 +1,6 @@
 <template>
   <div v-esc="close" class="modal-container" :class="{ 'closed': !open, 'closing': closing }">
-    <div class="modal">
+    <div class="modal" :class="{ 'solved': solved }">
       <div @click="close" class="close">&times;</div>
       <div class="problem-header">
         <h1>{{ title }}</h1><br>
@@ -8,7 +8,8 @@
         <h4>{{ category }}</h4>
       </div>
       <div class="description"><p>{{ description }}</p></div>
-      <div class="flag-input"><input v-model="flag" type="text" @keydown.enter="submit" placeholder="flag{}"><div class="submit"><button @click="submit">Submit</button></div></div>
+      <div v-if="!solved" class="flag-input"><input v-model="flag" type="text" @keydown.enter="submit" placeholder="flag{}"><div class="submit"><button @click="submit">Submit</button></div></div>
+      <div class="center solved-message" v-if="solved">You already solved this challenge!</div>
     </div>
     <div class="modal-bg" @click="close"></div>
   </div>
@@ -26,7 +27,9 @@ export default {
     'category',
     'description',
     'id',
-    'toast'
+    'toast',
+    'solved',
+    'update'
   ],
   data () {
     return {
@@ -51,6 +54,7 @@ export default {
           this.toast('Nope, that\'s not it.')
         }
         this.flag = ''
+        this.update()
       }.bind(this))
     }
   }
@@ -59,6 +63,13 @@ export default {
 
 <style lang="scss">
   @import '../styles/colors.scss';
+
+  .solved-message {
+    background-color: $secondary;
+    padding: 0.8em;
+    box-shadow:  0 0 1em darken($secondary, 20%);
+    border-radius: 1em;
+  }
 
   .problem-header {
     text-align: center;
