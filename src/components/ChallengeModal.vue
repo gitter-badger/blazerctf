@@ -67,7 +67,7 @@ export default {
   .solved-message {
     background-color: $secondary;
     padding: 0.8em;
-    box-shadow:  0 0 1em darken($secondary, 20%);
+    border: 0.06em solid darken($secondary, 8%);
     border-radius: 1em;
   }
 
