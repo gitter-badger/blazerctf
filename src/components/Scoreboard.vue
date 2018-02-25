@@ -64,7 +64,11 @@ export default {
     },
     number () {
       this.teams.sort(function (a, b) {
-        return b.score - a.score
+        if (a.score !== b.score) {
+          return b.score - a.score
+        } else {
+          return Math.max(b.solves.map(solve => solve.time))-Math.max(b.solves.map(solve => solve.time))
+        }
       })
     }
   },
