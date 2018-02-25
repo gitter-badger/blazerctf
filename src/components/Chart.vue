@@ -1,25 +1,28 @@
 <template>
-  <div class="chart-container">
-    <svg id="graph" class="chart" transform="scale(1, -1)">
-      <g v-for="line in svgLines">
-        <circle v-for="point in line.points.slice(1)" :cx="point[0]" :cy="point[1]" r="3"></circle>
-        <polyline fill="none"
-          :alt="line.name"
-          stroke-width="3"
-          :points="line.points.join(' ')"
-        />
-        <polyline @mouseover="showTooltip(line.name, line.score)"
-          @mouseleave="hideTooltip"
-          fill="none"
-          stroke="none"
-          stroke-opacity="0"
-          stroke-width="15"
-          :points="line.points.join(' ')"
-          style="cursor: pointer;"
-        />
-      </g>
-    </svg>
-    <div class="tooltip" id="tooltip">{{ tooltipMessage }}</div>
+  <div class="container-container">
+    <div class="chart-container">
+      <svg id="graph" class="chart" transform="scale(1, -1)">
+        <g v-for="line in svgLines">
+          <circle v-for="point in line.points.slice(1)" :cx="point[0]" :cy="point[1]" r="3"></circle>
+          <polyline fill="none"
+            :alt="line.name"
+            stroke-width="3"
+            :points="line.points.join(' ')"
+          />
+          <polyline @mouseover="showTooltip(line.name, line.score)"
+            @mouseleave="hideTooltip"
+            fill="none"
+            stroke="none"
+            stroke-opacity="0"
+            stroke-width="15"
+            :points="line.points.join(' ')"
+            style="cursor: pointer;"
+          />
+        </g>
+      </svg>
+      <div class="tooltip" id="tooltip">{{ tooltipMessage }}</div>
+    </div>
+    <div class="labels"><div class="label" v-for="day in days">{{ day }}</div></div>
   </div>
 </template>
 
@@ -39,7 +42,8 @@ export default {
       teams: [],
       config: config,
       tooltipMessage: '',
-      tooltipTimeout: null
+      tooltipTimeout: null,
+      days: []
     }
   },
   computed: {
@@ -98,6 +102,13 @@ export default {
           }
         }
         this.svgLines = lines
+        var days = []
+        for (var timestamp = this.minX; timestamp < this.maxX; timestamp += 86400000) {
+          days.push(((new Date(timestamp)).getMonth() + 1).toString() + '/' + (new Date(timestamp)).getDate().toString())
+        }
+        var lastDay = ((new Date(this.maxX)).getMonth() + 1).toString() + '/' + (new Date(this.maxX)).getDate().toString()
+        if (days.indexOf(lastDay) == -1) { days.push(lastDay) }
+        this.days = days
       }.bind(this))
     },
     svgX (x) {
@@ -147,7 +158,6 @@ export default {
   height: 8em;
   border-bottom: 0.1em solid $secondary;
   border-left: 0.1em solid $secondary;
-  margin-bottom: 1em;
 }
 .chart {
   width: 100%;
@@ -176,5 +186,17 @@ export default {
   padding: 0.5em;
   font-size: 0.8em;
   transition: opacity 0.07s;
+}
+
+.container-container {
+  margin-bottom: 1em;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+  .label {
+    display: inline-block;
+  }
 }
 </style>
