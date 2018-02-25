@@ -45,7 +45,7 @@
         <polyline class="cls-3" points="1271 501.11 1271 456.55 1267 456.55 1267 502.11"/>
       </g>
       <g id="Inside_Wall" data-name="Inside Wall">
-        <polyline class="cls-3" points="977 483.11 977 616.11 942 616.11 942 478.11"/>
+        <polyline class="cls-3" points="977 479 977 616.11 942 616.11 942 478.11"/>
         <path class="cls-4" d="M1011.5,522.36" transform="translate(0.5 0)"/>
         <polyline class="cls-2" points="995.75 484.77 977 482.79 977 616.11 1153.23 616.11 1145.42 500.36 1153.23 501.17"/>
         <polyline class="cls-2" points="1153 616.11 1153 501.17 1143.88 500.2"/>
