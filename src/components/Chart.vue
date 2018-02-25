@@ -175,6 +175,6 @@ export default {
   border-radius: 1em;
   padding: 0.5em;
   font-size: 0.8em;
-  transition: opacity 0.1s;
+  transition: opacity 0.07s;
 }
 </style>
