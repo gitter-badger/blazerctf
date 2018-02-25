@@ -2,28 +2,21 @@
   <div class="chart-container">
     <svg id="graph" class="chart" transform="scale(1, -1)">
       <g v-for="line in svgLines">
-        <polyline vector-effect="non-scaling-stroke" @mouseover="showTooltip(line.name, line.score)"
-                  @mouseleave="hideTooltip"
-                  fill="none"
-                  stroke="none"
-                  stroke-opacity="0"
-                  stroke-width="15"
-                  :points="line.points.join(' ')"
-                  style="cursor: pointer;"
+        <circle v-for="point in line.points.slice(1)" :cx="point[0]" :cy="point[1]" r="3"></circle>
+        <polyline fill="none"
+          :alt="line.name"
+          stroke-width="3"
+          :points="line.points.join(' ')"
         />
-        <polyline vector-effect="non-scaling-stroke" @mouseover="showTooltip(line.name, line.score)"
-                  @mouseleave="hideTooltip"
-                  fill="none"
-                  :alt="line.name"
-                  stroke-width="3"
-                  :points="line.points.join(' ')"
-                  style="cursor: pointer;"
+        <polyline @mouseover="showTooltip(line.name, line.score)"
+          @mouseleave="hideTooltip"
+          fill="none"
+          stroke="none"
+          stroke-opacity="0"
+          stroke-width="15"
+          :points="line.points.join(' ')"
+          style="cursor: pointer;"
         />
-        <circle @mouseover="showTooltip(line.name, line.score)"
-                @mouseleave="hideTooltip"
-                style="cursor: pointer;"
-                v-for="point in line.points.slice(1)" :cx="point[0]" :cy="point[1]" r="3">
-        </circle>
       </g>
     </svg>
     <div class="tooltip" id="tooltip">{{ tooltipMessage }}</div>
@@ -45,7 +38,8 @@ export default {
       lines: [],
       teams: [],
       config: config,
-      tooltipMessage: ''
+      tooltipMessage: '',
+      tooltipTimeout: null
     }
   },
   computed: {
@@ -116,11 +110,17 @@ export default {
       this.updatePoints(this.teams, true)
     },
     showTooltip (name, score) {
+      clearTimeout(this.tooltipTimeout)
       this.tooltipMessage = name + ' · ' + score + ' points'
       document.getElementById('tooltip').style.display = 'block'
+      this.tooltipTimeout = setTimeout(function () { document.getElementById('tooltip').style.opacity = '1' }, 0)
     },
     hideTooltip () {
-      document.getElementById('tooltip').style.display = 'none'
+      clearTimeout(this.tooltipTimeout)
+      document.getElementById('tooltip').style.opacity = '0'
+      this.tooltipTimeout = setTimeout(function () {
+        document.getElementById('tooltip').style.display = 'none'
+      }, 100)
     },
     moveTooltip (event) {
       document.getElementById('tooltip').style.top = event.clientY + 10 + 'px'
@@ -166,6 +166,7 @@ export default {
 }
 
 .tooltip {
+  opacity: 0;
   display: none;
   position: fixed;
   z-index: 100;
@@ -174,5 +175,6 @@ export default {
   border-radius: 1em;
   padding: 0.5em;
   font-size: 0.8em;
+  transition: opacity 0.1s;
 }
 </style>
