@@ -2,34 +2,31 @@
   <div class="chart-container">
     <svg id="graph" class="chart" transform="scale(1, -1)">
       <g v-for="line in svgLines">
-        <polyline vector-effect="non-scaling-stroke" onmouseover="evt.target.parentNode.getElementsByClassName('label')[0].setAttribute('opacity', '1');"
-                  onmouseout="evt.target.parentNode.getElementsByClassName('label')[0].setAttribute('opacity', '0');"
+        <polyline vector-effect="non-scaling-stroke" @mouseover="showTooltip(line.name, line.score)"
+                  @mouseleave="hideTooltip"
                   fill="none"
                   stroke="none"
                   stroke-opacity="0"
-                  stroke-width="10"
+                  stroke-width="15"
                   :points="line.points.join(' ')"
                   style="cursor: pointer;"
         />
-        <polyline vector-effect="non-scaling-stroke" onmouseover="evt.target.parentNode.getElementsByClassName('label')[0].setAttribute('opacity', '1');"
-                  onmouseout="evt.target.parentNode.getElementsByClassName('label')[0].setAttribute('opacity', '0');"
+        <polyline vector-effect="non-scaling-stroke" @mouseover="showTooltip(line.name, line.score)"
+                  @mouseleave="hideTooltip"
                   fill="none"
                   :alt="line.name"
                   stroke-width="3"
                   :points="line.points.join(' ')"
                   style="cursor: pointer;"
         />
-        <circle onmouseover="evt.target.parentNode.getElementsByClassName('label')[0].setAttribute('opacity', '1');"
-                onmouseout="evt.target.parentNode.getElementsByClassName('label')[0].setAttribute('opacity', '0');"
+        <circle @mouseover="showTooltip(line.name, line.score)"
+                @mouseleave="hideTooltip"
                 style="cursor: pointer;"
                 v-for="point in line.points.slice(1)" :cx="point[0]" :cy="point[1]" r="3">
         </circle>
-        <g class="label" style="transition: opacity 0.4s;" opacity="0">
-          <text transform="scale(8, -8)" :y="-(maxY-minY-175)/8" font-family="Orbitron" :fill="line.color">{{ line.name }}</text>
-          <text transform="scale(6, -6)" :y="-(maxY-minY-325)/6" font-family="Orbitron" fill="white">{{ line.points.slice(-1)[0][1] }}</text>
-        </g>
       </g>
     </svg>
+    <div class="tooltip" id="tooltip">{{ tooltipMessage }}</div>
   </div>
 </template>
 
@@ -37,13 +34,18 @@
 import axios from 'axios'
 import config from '../config'
 
+async function getChallenges () {
+  return axios.get(config.api_url + '/challenges')
+}
+
 export default {
   data () {
     return {
       svgLines: [],
       lines: [],
       teams: [],
-      config: config
+      config: config,
+      tooltipMessage: ''
     }
   },
   computed: {
@@ -61,15 +63,26 @@ export default {
     }
   },
   methods: {
-    updatePoints (teams) {
-      this.teams = teams
-      var lines = []
-      axios.get(config.api_url + '/challenges').then(function (response) {
-        var challenges = response.data
+    updatePoints (teams, keepChallenges) {
+      var promise
+      if (!this.challenges || !keepChallenges) {
+        promise = getChallenges()
+      } else {
+        promise = new Promise(function (resolve, reject) { resolve() })
+      }
+      promise.then(function (response) {
+        if (response) {
+          this.challenges = response.data
+        }
+        var challenges = this.challenges
+        this.teams = teams
+        var lines = []
         for (var t = 0; t < teams.length; t++) {
           if (teams[t].solves.length > 0) {
             lines.push({
-              points: [[+new Date(teams[t].created), 0]]
+              points: [[+new Date(teams[t].created), 0]],
+              name: teams[t].name,
+              score: teams[t].score
             })
             var score = 0
             for (var s = 0; s < teams[t].solves.length; s++) {
@@ -100,14 +113,27 @@ export default {
       return (y - this.minY) / (this.maxY - this.minY) * (document.getElementById('graph').getBoundingClientRect().height - 20)
     },
     update () {
-      this.updatePoints(this.teams)
+      this.updatePoints(this.teams, true)
+    },
+    showTooltip (name, score) {
+      this.tooltipMessage = name + ' · ' + score + ' points'
+      document.getElementById('tooltip').style.display = 'block'
+    },
+    hideTooltip () {
+      document.getElementById('tooltip').style.display = 'none'
+    },
+    moveTooltip (event) {
+      document.getElementById('tooltip').style.top = event.clientY + 10 + 'px'
+      document.getElementById('tooltip').style.left = event.clientX + 10 + 'px'
     }
   },
   mounted () {
     window.addEventListener('resize', this.update)
+    window.addEventListener('mousemove', this.moveTooltip)
   },
   beforeDestroy () {
     window.removeEventListener('resize', this.update)
+    window.removeEventListener('mousemove', this.moveTooltip)
   }
 }
 </script>
@@ -137,5 +163,16 @@ export default {
   circle {
     fill: $primary;
   }
+}
+
+.tooltip {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 1em;
+  padding: 0.5em;
+  font-size: 0.8em;
 }
 </style>
