@@ -67,7 +67,7 @@ export default {
         if (a.score !== b.score) {
           return b.score - a.score
         } else {
-          return Math.max(b.solves.map(solve => solve.time))-Math.max(b.solves.map(solve => solve.time))
+          return Math.max(...a.solves.map(solve => +new Date(solve.time))) - Math.max(...b.solves.map(solve => +new Date(solve.time)))
         }
       })
     }
