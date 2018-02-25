@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>Scoreboard</h1>
+    <chart ref="chart"></chart>
     <div class="checkbox-container form">
       <div class="checkbox">
         <input v-model="showIneligible" type="checkbox" id="ineligible">
@@ -34,6 +35,7 @@
 <script>
 import config from '@/config.js'
 import axios from 'axios'
+import Chart from './Chart'
 
 export default {
   name: 'scoreboard',
@@ -45,6 +47,9 @@ export default {
       showIneligible: true
     }
   },
+  components: {
+    Chart: Chart
+  },
   methods: {
     update () {
       axios.get(config.api_url + '/teams').then(function (response) {
@@ -54,6 +59,7 @@ export default {
         }
         this.teamsLoaded = true
         this.number()
+        this.$refs.chart.updatePoints(this.teams)
       }.bind(this))
     },
     number () {
