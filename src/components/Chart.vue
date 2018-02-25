@@ -193,6 +193,10 @@ export default {
 }
 
 .labels {
+  @media screen and (max-width: 768px) {
+    font-size: 0.8em;
+  }
+
   display: flex;
   justify-content: space-between;
   .label {
