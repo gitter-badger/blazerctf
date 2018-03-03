@@ -62,10 +62,10 @@ export default {
       top: 0;
       height: 3em;
       width: 3em;
+      display: none;
     }
 
     .hamburger {
-      display: none;
       align-items: center;
       border-top: 2px solid white;
       border-bottom: 2px solid white;
@@ -131,6 +131,10 @@ export default {
           z-index: 1000;
           box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
         }
+      }
+
+      .hamburger-container {
+        display: block;
       }
 
       .hamburger {
