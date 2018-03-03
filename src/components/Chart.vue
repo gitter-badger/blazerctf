@@ -84,7 +84,7 @@ export default {
             })
             var score = 0
             for (var s = 0; s < teams[t].solves.length; s++) {
-              score += challenges.filter(challenge => challenge.id === teams[t].solves[s].challenge)[0].value
+              score += challenges.filter(challenge => challenge.id === teams[t].solves[s].challenge.id)[0].value
               var time = +new Date(teams[t].solves[s].time)
               lines[lines.length - 1].points.push([
                 time,
