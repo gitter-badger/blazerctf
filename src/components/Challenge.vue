@@ -14,11 +14,12 @@ export default {
     'points',
     'category',
     'index',
-    'solved'
+    'solved',
+    'id'
   ],
   methods: {
     openModal () {
-      this.$parent.$refs['modal' + this.index.toString()][0].open = true
+      this.$router.push('/challenges/' + this.id)
     }
   }
 }

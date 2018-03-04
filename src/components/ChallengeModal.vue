@@ -44,6 +44,7 @@ export default {
       setTimeout(function () {
         this.closing = false
         this.open = false
+        this.$router.push('/challenges')
       }.bind(this), 500)
     },
     submit () {

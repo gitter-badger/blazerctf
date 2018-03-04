@@ -3,8 +3,8 @@
     <h1 class="center">Challenges</h1>
     <div class="challenges">
       <div v-for="(challenge, index) in challenges" class="challenge-group">
-        <challenge :solved="challenge.solved" :index="index" :title="challenge.title" :points="challenge.value" :category="challenge.category"></challenge>
-        <challenge-modal :update="update" :solved="challenge.solved" :toast="toast" :id="challenge.id" :ref="'modal'+index.toString()" :title="challenge.title" :points="challenge.value" :category="challenge.category" :description="challenge.description"></challenge-modal>
+        <challenge :id="challenge.id" :solved="challenge.solved" :index="index" :title="challenge.title" :points="challenge.value" :category="challenge.category"></challenge>
+        <challenge-modal :update="update" :solved="challenge.solved" :toast="toast" :id="challenge.id" :ref="'modal'+challenge.id.toString()" :title="challenge.title" :points="challenge.value" :category="challenge.category" :description="challenge.description"></challenge-modal>
       </div>
     </div>
   </div>
@@ -24,7 +24,8 @@ export default {
   },
   props: [
     'toast',
-    'updateAll'
+    'updateAll',
+    'loggedIn'
   ],
   data () {
     return {
@@ -32,14 +33,33 @@ export default {
     }
   },
   methods: {
-    update () {
-      axios.get(config.api_url + '/challenges').then(function (response) {
+    update (id) {
+      if (!this.loggedIn) {
+        return this.$router.push('/login')
+      }
+      return axios.get(config.api_url + '/challenges').then(function (response) {
         this.challenges = response.data
+        this.$nextTick(function () {
+          if (id || this.$route.params.id) {
+            this.$refs['modal' + (id || this.$route.params.id).toString()][0].open = true
+          }
+        })
       }.bind(this))
     }
   },
-  created () {
+  mounted () {
     this.update()
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log(to)
+    this.update(to.params.id)
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    if (to.name === 'Challenge' || to.name === 'Challenges') {
+      this.update(to.params.id)
+    }
+    next()
   }
 }
 </script>

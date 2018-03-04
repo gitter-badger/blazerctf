@@ -16,19 +16,7 @@
     <button @click="create" v-if="tab === 'create'">Create Team</button>
   </div>
   <div class="cards">
-    <div class="card" v-if="hasTeam">
-      <h2 class="center">Team {{ team.name }}</h2>
-      <table class="team-info">
-        <tr><td><h3>Name</h3></td><td><p>{{ team.name }}</p></td></tr>
-        <tr><td><h3>Passcode</h3></td><td><p>{{ team.passcode }}</p></td></tr>
-        <tr><td><h3>Eligible</h3></td><td><p>{{ team.eligible ? "Yes" : "No" }}</p></td></tr>
-        <tr><td><h3>School</h3></td><td><p>{{ team.affiliation ? team.affiliation : "None" }}</p></td></tr>
-      </table>
-      <h3>Members</h3>
-      <ul>
-        <li v-for="member in team.members">{{ member.username }}</li>
-      </ul>
-    </div>
+    <team-profile v-if="hasTeam" :team="team"></team-profile>
   </div>
 
 </div>
@@ -75,8 +63,10 @@
 <script>
 import config from '@/config.js'
 import axios from 'axios'
+import TeamProfile from "./TeamProfile";
 
 export default {
+  components: {TeamProfile},
   data () {
     return {
       teamname: null,

@@ -5,6 +5,8 @@ import Scoreboard from '@/components/Scoreboard'
 import Profile from '@/components/Profile'
 import Login from '@/components/Login'
 import Signup from '@/components/Signup'
+import Team from '@/components/Team'
+import User from '@/components/User'
 
 export default {
   pages: [
@@ -64,6 +66,28 @@ export default {
         component: Signup
       },
       registration: true
+    },
+    {
+      route: {
+        path: '/teams/:id',
+        component: Team
+      },
+      hidden: true
+    },
+    {
+      route: {
+        path: '/users/:id',
+        component: User
+      },
+      hidden: true
+    },
+    {
+      route: {
+        name: 'Challenge',
+        path: '/challenges/:id',
+        component: Challenges
+      },
+      hidden: true
     }
   ],
   competition: {

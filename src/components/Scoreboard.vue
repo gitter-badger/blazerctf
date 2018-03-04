@@ -23,7 +23,7 @@
       <tbody>
         <tr v-for="(team, index) in teams">
           <td>{{ index+1 }}</td>
-          <td>{{ team.name }}</td>
+          <td><router-link :to="'/teams/' + team.id">{{ team.name }}</router-link></td>
           <td>{{ team.affiliation ? team.affiliation : "―" }}</td>
           <td>{{ team.score }}</td>
         </tr>
