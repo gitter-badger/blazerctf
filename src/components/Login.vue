@@ -37,7 +37,9 @@ export default {
   methods: {
     login () {
       if (this.formData.username && this.formData.password) {
-        axios.post(config.api_url + '/auth', this.formData, {withCredentials: true}).then(function () {
+        var _csrf = this.$root.randomString(64).replace(/[;, ]/g, '')
+        document.cookie = '_csrf=' + _csrf
+        axios.post(config.api_url + '/auth', Object.assign(this.formData, {_csrf: _csrf}), {withCredentials: true}).then(function () {
           this.updateAll()
           this.$router.push('/')
           this.toast('Successfully logged in!')

@@ -99,7 +99,10 @@ export default {
   methods: {
     join () {
       if (this.teamname && this.passcode) {
+        var _csrf = this.$root.randomString(64).replace(/[;, ]/g, '')
+        document.cookie = '_csrf=' + _csrf
         axios.patch(config.api_url + '/teams', {
+          _csrf: _csrf,
           name: this.teamname,
           passcode: this.passcode
         }, {withCredentials: true}).then(function (response) {
@@ -113,7 +116,10 @@ export default {
     },
     create () {
       if (this.teamname && this.passcode) {
+        var _csrf = this.$root.randomString(64).replace(/[;, ]/g, '')
+        document.cookie = '_csrf=' + _csrf
         axios.post(config.api_url + '/teams', {
+          _csrf: _csrf,
           name: this.teamname,
           passcode: this.passcode,
           affiliation: this.school

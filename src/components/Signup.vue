@@ -49,7 +49,9 @@ export default {
       if (this.formData.email && this.formData.username && this.formData.password && this.confirmPassword) {
         if (this.formData.password === this.confirmPassword) {
           if (/\S+@\S+\.\S+/.test(this.formData.email)) {
-            axios.post(config.api_url + '/users', this.formData).then(function () {
+            var _csrf = this.$root.randomString(64).replace(/[;, ]/g, '')
+            document.cookie = '_csrf=' + _csrf
+            axios.post(config.api_url + '/users', Object.assign(this.formData, {_csrf: _csrf})).then(function () {
               this.updateAll()
               this.$router.push('login')
             }.bind(this)).catch(function () {

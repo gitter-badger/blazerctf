@@ -47,7 +47,9 @@ export default {
       }.bind(this), 500)
     },
     submit () {
-      axios.post(config.api_url + '/challenges/' + this.id.toString() + '/submissions', { flag: this.flag }).then(function (response) {
+      var _csrf = this.$root.randomString(64).replace(/[;, ]/g, '')
+      document.cookie = '_csrf=' + _csrf
+      axios.post(config.api_url + '/challenges/' + this.id.toString() + '/submissions', { _csrf: _csrf, flag: this.flag }).then(function (response) {
         if (response.data.correct) {
           this.toast('Nice! You got it.')
         } else {

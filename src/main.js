@@ -11,5 +11,17 @@ new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  methods: {
+    randomString (length) {
+      var string = ''
+      var crypto = window.crypto || window.msCrypto
+      var values = new Uint32Array(length)
+      crypto.getRandomValues(values)
+      for (var i = 0; i < length; i++) {
+        string += String.fromCharCode((values[i] % (127 - 32)) + 32)
+      }
+      return string
+    }
+  }
 })
