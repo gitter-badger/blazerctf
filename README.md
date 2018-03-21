@@ -1,5 +1,7 @@
 # blazerctf
 
+[![Join the chat at https://gitter.im/blairsec/blazerctf](https://badges.gitter.im/blairsec/blazerctf.svg)](https://gitter.im/blairsec/blazerctf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > A CTF Platform
 
 ## Build Setup
